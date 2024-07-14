@@ -1,3 +1,5 @@
+
+  
 import { useState, useEffect } from "react";
 
 import { MainCard } from "../components/MainCard";
@@ -15,22 +17,24 @@ import styles from "../styles/Home.module.css";
 export const App = () => {
   const [cityInput, setCityInput] = useState("Riga");
   const [triggerFetch, setTriggerFetch] = useState(true);
-  const [weatherData, setWeatherData] = useState();
+  const [weatherData, setMeteoData] = useState();
   const [unitSystem, setUnitSystem] = useState("metric");
+
+
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch("api/data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cityInput }),
+      const res = await fetch("api/dataCity", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
       });
       const data = await res.json();
-      setWeatherData({ ...data });
-      setCityInput("");
+      console.log(data);
+      // setMeteoData({ ...data });
+      // setCityInput("");
     };
     getData();
-  }, [triggerFetch]);
+  }, []);
 
   const changeSystem = () =>
     unitSystem == "metric"
