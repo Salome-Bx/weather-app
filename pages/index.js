@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import { MainCard } from "../components/MainCard";
 import { ContentBox } from "../components/ContentBox";
 import { Header } from "../components/Header";
@@ -9,28 +8,67 @@ import { MetricsBox } from "../components/MetricsBox";
 import { UnitSwitch } from "../components/UnitSwitch";
 import { LoadingScreen } from "../components/LoadingScreen";
 import { ErrorScreen } from "../components/ErrorScreen";
-
 import styles from "../styles/Home.module.css";
 
 export const App = () => {
   const [cityInput, setCityInput] = useState("Riga");
   const [triggerFetch, setTriggerFetch] = useState(true);
-  const [weatherData, setWeatherData] = useState();
+  const [weatherData, setMeteoData] = useState();
+  const [weatherData2, setMeteoData2] = useState();
   const [unitSystem, setUnitSystem] = useState("metric");
 
+
   useEffect(() => {
-    const getData = async () => {
-      const res = await fetch("api/data", {
+      refreshMeteoData(() => {
+      }); 
+  }, []);
+
+
+  
+  const refreshMeteoData = async () => {
+
+      const resCity = await fetch("/api/dataCity")
+        .then((response) => {
+            if(!response.ok){
+              throw new Error("marche pas");
+            }            
+            return response.json();
+        })
+        
+        .then((response) => {
+          return response.results[0]; // Imprime la réponse pour vérifier sa structure
+        })
+
+      setMeteoData(resCity);
+  console.log(data)
+  
+    const getWeatherData2 = await fetch("/api/dataMeteo", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cityInput }),
-      });
-      const data = await res.json();
-      setWeatherData({ ...data });
-      setCityInput("");
-    };
-    getData();
-  }, [triggerFetch]);
+        headers: { 
+          "Content-Type": "application/json", 
+      },
+        body: JSON.stringify({
+          // latitude: resCity.latitude,
+          // longitude: resCity.longitude,
+          // timezone: resCity.timezone,
+          // country: resCity.country,
+        }),
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+      .then((data) => {
+        console.log(data); // Imprime la réponse pour vérifier sa structure
+      })
+      
+    
+    setMeteoData2(getWeatherData2);
+  }
+
+  console.log(weatherData)
+
 
   const changeSystem = () =>
     unitSystem == "metric"
@@ -41,9 +79,9 @@ export const App = () => {
     <div className={styles.wrapper}>
       <MainCard
         city={weatherData.name}
-        country={weatherData.sys.country}
-        description={weatherData.weather[0].description}
-        iconName={weatherData.weather[0].icon}
+        country={weatherData.country_code}
+        // description={weatherData.weather[0].description}
+        // iconName={weatherData.weather[0].icon}
         unitSystem={unitSystem}
         weatherData={weatherData}
       />
