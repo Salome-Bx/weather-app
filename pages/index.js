@@ -3,7 +3,6 @@ import { MainCard } from "../components/MainCard";
 import { ContentBox } from "../components/ContentBox";
 import { Header } from "../components/Header";
 import { DateAndTime } from "../components/DateAndTime";
-import { Search } from "../components/Search";
 import { MetricsBox } from "../components/MetricsBox";
 import { UnitSwitch } from "../components/UnitSwitch";
 import { LoadingScreen } from "../components/LoadingScreen";
@@ -11,10 +10,10 @@ import { ErrorScreen } from "../components/ErrorScreen";
 import styles from "../styles/Home.module.css";
 
 export const App = () => {
-  const [cityInput, setCityInput] = useState("Riga");
-  const [triggerFetch, setTriggerFetch] = useState(true);
-  const [weatherData, setMeteoData] = useState();
-  const [weatherData2, setMeteoData2] = useState();
+ 
+
+  const [cityData, setCityData] = useState();
+  const [weatherData, setWeatherData] = useState();
   const [unitSystem, setUnitSystem] = useState("metric");
 
 
@@ -30,44 +29,45 @@ export const App = () => {
       const resCity = await fetch("/api/dataCity")
         .then((response) => {
             if(!response.ok){
-              throw new Error("marche pas");
+              throw new Error("Les données n'ont pas pu être récupérées");
             }            
             return response.json();
         })
         
         .then((response) => {
-          return response.results[0]; // Imprime la réponse pour vérifier sa structure
+          console.log(response.results[0]);
+          return response.results[0]; //récupère le premier résultat de l'objet
         })
 
-      setMeteoData(resCity);
-  console.log(data)
+      setCityData(resCity);
   
-    const getWeatherData2 = await fetch("/api/dataMeteo", {
+  
+    const resWeather = await fetch("/api/dataMeteo", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json", 
       },
         body: JSON.stringify({
-          // latitude: resCity.latitude,
-          // longitude: resCity.longitude,
-          // timezone: resCity.timezone,
-          // country: resCity.country,
+          latitude: resCity.latitude,
+          longitude: resCity.longitude,
+          timezone: resCity.timezone,
+          country: resCity.country_code,
         }),
     }).then((response) => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Les données n'ont pas pu être récupérées");
       }
       return response.json();
     })
-      .then((data) => {
-        console.log(data); // Imprime la réponse pour vérifier sa structure
+      .then((response) => {
+        console.log(response); 
+        return response;
       })
       
     
-    setMeteoData2(getWeatherData2);
+    setWeatherData(resWeather);
   }
 
-  console.log(weatherData)
 
 
   const changeSystem = () =>
@@ -78,29 +78,16 @@ export const App = () => {
   return weatherData && !weatherData.message ? (
     <div className={styles.wrapper}>
       <MainCard
-        city={weatherData.name}
-        country={weatherData.country_code}
-        // description={weatherData.weather[0].description}
-        // iconName={weatherData.weather[0].icon}
+        city={cityData.name}
+        country={cityData.country_code}
+        description={""}
+        iconName={weatherData.hourly.weather_code}
         unitSystem={unitSystem}
         weatherData={weatherData}
       />
       <ContentBox>
         <Header>
           <DateAndTime weatherData={weatherData} unitSystem={unitSystem} />
-          <Search
-            placeHolder="Search a city..."
-            value={cityInput}
-            onFocus={(e) => {
-              e.target.value = "";
-              e.target.placeholder = "";
-            }}
-            onChange={(e) => setCityInput(e.target.value)}
-            onKeyDown={(e) => {
-              e.keyCode === 13 && setTriggerFetch(!triggerFetch);
-              e.target.placeholder = "Search a city...";
-            }}
-          />
         </Header>
         <MetricsBox weatherData={weatherData} unitSystem={unitSystem} />
         <UnitSwitch onClick={changeSystem} unitSystem={unitSystem} />
@@ -108,11 +95,6 @@ export const App = () => {
     </div>
   ) : weatherData && weatherData.message ? (
     <ErrorScreen errorMessage="City not found, try again!">
-      <Search
-        onFocus={(e) => (e.target.value = "")}
-        onChange={(e) => setCityInput(e.target.value)}
-        onKeyDown={(e) => e.keyCode === 13 && setTriggerFetch(!triggerFetch)}
-      />
     </ErrorScreen>
   ) : (
     <LoadingScreen loadingMessage="Loading data..." />
