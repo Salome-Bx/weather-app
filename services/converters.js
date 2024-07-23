@@ -32,10 +32,34 @@ export const degToCompass = (num) => {
   return arr[val % 16];
 };
 
-export const unixToLocalTime = (unixSeconds, timezone) => {
-  let time = new Date((unixSeconds + timezone) * 1000)
-    .toISOString()
-    .match(/(\d{2}:\d{2})/)[0];
 
-  return time.startsWith("0") ? time.substring(1) : time;
+
+export const isoToLocalTime = (time, timezone) => {
+  // Créer une instance de Date à partir de la chaîne de caractères ISO 8601
+  let date = new Date(time);
+
+  if (isNaN(date.getTime())) {
+    console.error("Erreur: La date n'est pas valide.");
+    return "";
+  }
+
+  let options = {
+    
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: timezone
+  };
+
+  // Utiliser 'en-GB' pour le format JJ Mois YYYY HH:MM
+  const formatter = new Intl.DateTimeFormat('fr-FR', options);
+
+  // Formater la date selon les options spécifiées
+  console.log(formatter.format(date));
+  return formatter.format(date);
+  
 };
+
+
+
+

@@ -7,6 +7,7 @@ import { MetricsBox } from "../components/MetricsBox";
 import { UnitSwitch } from "../components/UnitSwitch";
 import { LoadingScreen } from "../components/LoadingScreen";
 import { ErrorScreen } from "../components/ErrorScreen";
+import { isoToLocalTime } from '../services/converters';
 import styles from "../styles/Home.module.css";
 
 export const App = () => {
@@ -60,7 +61,10 @@ export const App = () => {
       return response.json();
     })
       .then((response) => {
+        
         console.log(response); 
+        const formattedHours = response.hourly.time.map(time => isoToLocalTime(time, response.timezone));
+        console.log(formattedHours); 
         return response;
       })
       
