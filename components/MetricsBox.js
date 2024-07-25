@@ -39,18 +39,18 @@ export const MetricsBox = ({ weatherData, unitSystem }) => {
         iconSrc={"/icons/binocular.png"}
         metric={getVisibility(unitSystem, weatherData.visibility)}
         unit={unitSystem == "metric" ? "km" : "miles"}
-      />  */}
-      {/* <MetricsCard
+      />   */}
+       <MetricsCard
         title={"Sunrise"}
         iconSrc={"/icons/sunrise.png"}
         metric={getTime(
           unitSystem,
-          weatherData.sys.sunrise,
+          weatherData.daily.sunrise,
           weatherData.timezone
         )}
         unit={getAMPM(
           unitSystem,
-          weatherData.sys.sunrise,
+          weatherData.daily.sunrise,
           weatherData.timezone
         )}
       />
@@ -59,11 +59,11 @@ export const MetricsBox = ({ weatherData, unitSystem }) => {
         iconSrc={"/icons/sunset.png"}
         metric={getTime(
           unitSystem,
-          weatherData.sys.sunset,
+          weatherData.daily.sunset,
           weatherData.timezone
         )}
-        unit={getAMPM(unitSystem, weatherData.sys.sunset, weatherData.timezone)}
-      /> */}
+        unit={getAMPM(unitSystem, weatherData.daily.sunset, weatherData.timezone)}
+      />
     </div>
   );
 };

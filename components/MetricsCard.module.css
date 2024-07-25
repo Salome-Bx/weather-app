@@ -5,6 +5,7 @@
   border-radius: 20px;
 }
 
+
 .content {
   display: grid;
   grid-template-columns: 1fr 1fr;
