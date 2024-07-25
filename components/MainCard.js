@@ -24,15 +24,15 @@ export const MainCard = ({
       />
       <h1 className={styles.temperature}>
         {unitSystem == "metric"
-          ? Math.round(weatherData.hourly.temperature_2m)
-          : Math.round(ctoF(weatherData.hourly.temperature_2m))}
+          ? Math.round(weatherData.current.temperature_2m)
+          : Math.round(ctoF(weatherData.current.temperature_2m))}
         °{unitSystem == "metric" ? "C" : "F"}
       </h1>
       <p>
-        Feels like{" "}
+        Ressentie{" "}
         {unitSystem == "metric"
-          ? Math.round(weatherData.hourly.apparent_temperature,)
-          : Math.round(ctoF(weatherData.hourly.apparent_temperature,))}
+          ? Math.round(weatherData.current.apparent_temperature,)
+          : Math.round(ctoF(weatherData.current.apparent_temperature,))}
         °{unitSystem == "metric" ? "C" : "F"}
       </p>
     </div>
