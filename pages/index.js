@@ -7,7 +7,6 @@ import { MetricsBox } from "../components/MetricsBox";
 import { UnitSwitch } from "../components/UnitSwitch";
 import { LoadingScreen } from "../components/LoadingScreen";
 import { ErrorScreen } from "../components/ErrorScreen";
-import { isoToLocalTime } from '../services/converters';
 import styles from "../styles/Home.module.css";
 
 export const App = () => {
@@ -35,9 +34,9 @@ export const App = () => {
             return response.json();
         })
         
-        .then((response) => {
-          console.log(response.results[0]);
-          return response.results[0]; //récupère le premier résultat de l'objet
+        .then((r) => {
+          console.log(r.results[0]);
+          return r.results[0]; //récupère le premier résultat de l'objet
         })
 
       setCityData(resCity);
@@ -52,7 +51,7 @@ export const App = () => {
           latitude: resCity.latitude,
           longitude: resCity.longitude,
           timezone: resCity.timezone,
-          country: resCity.country_code,
+          country: resCity.country,
         }),
     }).then((response) => {
       if (!response.ok) {
@@ -60,12 +59,10 @@ export const App = () => {
       }
       return response.json();
     })
-      .then((response) => {
+      .then((r) => {
         
-        console.log(response); 
-        const formattedHours = response.hourly.time.map(time => isoToLocalTime(time, response.timezone));
-        console.log(formattedHours); 
-        return response;
+        console.log(r); 
+        return r;
       })
       
     
@@ -85,7 +82,7 @@ export const App = () => {
         city={cityData.name}
         country={cityData.country_code}
         description={""}
-        iconName={weatherData.hourly.weather_code}
+        iconName={weatherData.current.weather_code}
         unitSystem={unitSystem}
         weatherData={weatherData}
       />
@@ -98,10 +95,10 @@ export const App = () => {
       </ContentBox>
     </div>
   ) : weatherData && weatherData.message ? (
-    <ErrorScreen errorMessage="City not found, try again!">
+    <ErrorScreen errorMessage="Ville non trouvée, veuillez resaisir la ville">
     </ErrorScreen>
   ) : (
-    <LoadingScreen loadingMessage="Loading data..." />
+    <LoadingScreen loadingMessage="Importation des données..." />
   );
 };
 

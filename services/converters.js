@@ -21,43 +21,37 @@ export const degToCompass = (num) => {
     "SE",
     "SSE",
     "S",
-    "SSW",
-    "SW",
-    "WSW",
-    "W",
-    "WNW",
-    "NW",
-    "NNW",
+    "SSO",
+    "SO",
+    "OSO",
+    "O",
+    "ONO",
+    "NO",
+    "NNO",
   ];
   return arr[val % 16];
 };
 
 
 
-export const isoToLocalTime = (time, timezone) => {
-  // Créer une instance de Date à partir de la chaîne de caractères ISO 8601
-  let date = new Date(time);
+export const unixToLocalTime = (unixSeconds, timezone) => {
 
-  if (isNaN(date.getTime())) {
-    console.error("Erreur: La date n'est pas valide.");
-    return "";
-  }
+  const date = new Date(unixSeconds);
 
-  let options = {
-    
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-    timeZone: timezone
+  const options = {
+    hour: '2-digit',
+    minute: '2-digit',
+    day: '2-digit',
+    month: 'long',
+    year: '2-digit',
+    timeZone: timezone,
+    hour12: false
   };
 
-  // Utiliser 'en-GB' pour le format JJ Mois YYYY HH:MM
   const formatter = new Intl.DateTimeFormat('fr-FR', options);
-
-  // Formater la date selon les options spécifiées
-  console.log(formatter.format(date));
+  console.log(formatter);
   return formatter.format(date);
-  
+
 };
 
 
