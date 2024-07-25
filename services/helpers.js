@@ -1,5 +1,5 @@
 import {
-  isoToLocalTime,
+  unixToLocalTime,
   kmToMiles,
   mpsToMph,
   timeTo12HourFormat,
@@ -15,12 +15,12 @@ export const getVisibility = (unitSystem, visibilityInMeters) =>
 
 export const getTime = (unitSystem, currentTime, timezone) =>
   unitSystem == "metric"
-    ? isoToLocalTime(currentTime, timezone)
-    : timeTo12HourFormat(isoToLocalTime(currentTime, timezone));
+    ? unixToLocalTime(currentTime, timezone)
+    : timeTo12HourFormat(unixToLocalTime(currentTime, timezone));
 
 export const getAMPM = (unitSystem, currentTime, timezone) =>
   unitSystem === "imperial"
-    ? isoToLocalTime(currentTime, timezone).split(":")[0] >= 12
+    ? unixToLocalTime(currentTime, timezone).split(":")[0] >= 12
       ? "PM"
       : "AM"
     : "";
