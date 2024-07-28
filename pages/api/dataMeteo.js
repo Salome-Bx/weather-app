@@ -4,7 +4,6 @@ export default async function handler(req, res) {
     const { latitude, longitude, timezone, country } = req.body;
 
     const getMeteoData = await fetch(
-      // `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,wind_speed_10m&timezone=${timezone}&forecast_days=1&models=meteofrance_seamless`,
       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_direction_10m,precipitation,weather_code,wind_speed_10m&timezone=${timezone}&forecast_days=1&daily=sunrise,sunset&models=best_match`,
       {
         method: "GET",
@@ -21,7 +20,6 @@ export default async function handler(req, res) {
     
 
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: "Echec de récupération des données" });
   }
 }
