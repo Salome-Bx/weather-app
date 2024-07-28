@@ -25,7 +25,7 @@ export const MetricsBox = ({ weatherData, unitSystem }) => {
       />
       <MetricsCard
         title={"Précipitation"}
-        iconSrc={"/icons/09d.svg"}
+        iconSrc={"/icons/61.svg"}
         metric={getWindSpeed(unitSystem, weatherData.current.precipitation)}
         unit={"mm"}
       />
@@ -39,31 +39,31 @@ export const MetricsBox = ({ weatherData, unitSystem }) => {
         iconSrc={"/icons/binocular.png"}
         metric={getVisibility(unitSystem, weatherData.visibility)}
         unit={unitSystem == "metric" ? "km" : "miles"}
-      />  */}
-      {/* <MetricsCard
-        title={"Sunrise"}
+      />   */}
+       <MetricsCard
+        title={"Levé du soleil"}
         iconSrc={"/icons/sunrise.png"}
         metric={getTime(
           unitSystem,
-          weatherData.sys.sunrise,
+          weatherData.daily.sunrise,
           weatherData.timezone
         )}
         unit={getAMPM(
           unitSystem,
-          weatherData.sys.sunrise,
+          weatherData.daily.sunrise,
           weatherData.timezone
         )}
       />
       <MetricsCard
-        title={"Sunset"}
+        title={"Coucher du soleil"}
         iconSrc={"/icons/sunset.png"}
         metric={getTime(
           unitSystem,
-          weatherData.sys.sunset,
+          weatherData.daily.sunset,
           weatherData.timezone
         )}
-        unit={getAMPM(unitSystem, weatherData.sys.sunset, weatherData.timezone)}
-      /> */}
+        unit={getAMPM(unitSystem, weatherData.daily.sunset, weatherData.timezone)}
+      />
     </div>
   );
 };

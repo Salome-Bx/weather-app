@@ -34,9 +34,9 @@ export const App = () => {
             return response.json();
         })
         
-        .then((r) => {
-          console.log(r.results[0]);
-          return r.results[0]; //récupère le premier résultat de l'objet
+        .then((response) => {
+          // console.log(response.results[0]);
+          return response.results[0]; //récupère le premier résultat de l'objet
         })
 
       setCityData(resCity);
@@ -59,10 +59,10 @@ export const App = () => {
       }
       return response.json();
     })
-      .then((r) => {
+      .then((response) => {
         
-        console.log(r); 
-        return r;
+        console.log(response); 
+        return response;
       })
       
     
@@ -81,7 +81,6 @@ export const App = () => {
       <MainCard
         city={cityData.name}
         country={cityData.country_code}
-        description={""}
         iconName={weatherData.current.weather_code}
         unitSystem={unitSystem}
         weatherData={weatherData}
@@ -94,9 +93,6 @@ export const App = () => {
         <UnitSwitch onClick={changeSystem} unitSystem={unitSystem} />
       </ContentBox>
     </div>
-  ) : weatherData && weatherData.message ? (
-    <ErrorScreen errorMessage="Ville non trouvée, veuillez resaisir la ville">
-    </ErrorScreen>
   ) : (
     <LoadingScreen loadingMessage="Importation des données..." />
   );
