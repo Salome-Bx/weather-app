@@ -2,7 +2,6 @@ import { degToCompass } from "../services/converters";
 import {
   getTime,
   getAMPM,
-  getVisibility,
   getWindSpeed,
 } from "../services/helpers";
 import { MetricsCard } from "./MetricsCard";
@@ -34,12 +33,7 @@ export const MetricsBox = ({ weatherData, unitSystem }) => {
         iconSrc={"/icons/compass.png"}
         metric={degToCompass(weatherData.current.wind_direction_10m)}
       /> 
-      {/* <MetricsCard
-        title={"Visibility"}
-        iconSrc={"/icons/binocular.png"}
-        metric={getVisibility(unitSystem, weatherData.visibility)}
-        unit={unitSystem == "metric" ? "km" : "miles"}
-      />   */}
+     
        <MetricsCard
         title={"Levé du soleil"}
         iconSrc={"/icons/sunrise.png"}
