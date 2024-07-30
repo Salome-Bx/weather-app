@@ -33,10 +33,11 @@ export const degToCompass = (num) => {
 };
 
 
+//modifier le format de l'heure et de la date
+export const iso8601ToLocalTime = (iso8601, timezone) => {
 
-export const unixToLocalTime = (unixSeconds, timezone) => {
-
-  const date = new Date(unixSeconds);
+  //détermine comment l'objet Date sera formatté
+  const dateHeure = new Date(iso8601);
 
   const options = {
     hour: '2-digit',
@@ -47,10 +48,10 @@ export const unixToLocalTime = (unixSeconds, timezone) => {
     timeZone: timezone,
     hour12: false
   };
-
-  const formatter = new Intl.DateTimeFormat('fr-FR', options);
-  console.log(formatter);
-  return formatter.format(date);
+  //objet de formattage international qui prend en paramètre la localité et les options
+  const dateHeureFr = new Intl.DateTimeFormat('fr-FR', options);
+  //obtenir la chaine de caractère
+  return dateHeureFr.format(dateHeure);
 
 };
 
