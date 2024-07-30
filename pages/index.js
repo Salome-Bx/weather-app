@@ -35,8 +35,7 @@ export const App = () => {
         })
         
         .then((response) => {
-          // console.log(response.results[0]);
-          return response.results[0]; //récupère le premier résultat de l'objet
+          return response.results[0]; 
         })
 
       setCityData(resCity);
@@ -71,20 +70,22 @@ export const App = () => {
 
 
 
+  
+
   const changeSystem = () =>
     unitSystem == "metric"
       ? setUnitSystem("imperial")
       : setUnitSystem("metric");
 
-  return weatherData && !weatherData.message ? (
-    <div className={styles.wrapper}>
+      return weatherData && !weatherData.message ? (
+        <div className={styles.wrapper}>
       <MainCard
         city={cityData.name}
         country={cityData.country_code}
-        iconName={weatherData.current.weather_code}
+        iconName={weatherData.current.isDay === 1 ? weatherData.current.weather_code : `${weatherData.current.weather_code}n`}
         unitSystem={unitSystem}
         weatherData={weatherData}
-      />
+        />
       <ContentBox>
         <Header>
           <DateAndTime weatherData={weatherData} unitSystem={unitSystem} />
