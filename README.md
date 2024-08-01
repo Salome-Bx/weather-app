@@ -1,15 +1,20 @@
 
 # Weather App
 
+
+Connexion de l'api Open-Meteo dans le contexte de ma formation Développeur web et web mobile
+
+Contexte : Affichage de données météos sur des écrans de transports en communs
+
 ![alt text](image.png)
 
+Fonctionnalités :
 
-
-1. Entrer une ville sur un fichier et recevez les résultats de celle-ci
+1. Entrer une ville sur un fichier et recevez les données météos de celle-ci
 
 2. Météo heure par heure
 
-3. Temperature et humidité
+3. Information de température et humidité
 
 4. Direction et vitesse du vent
 
@@ -22,7 +27,7 @@
 ## Installation
 
 
-  - git clone https://github.com/Salome-Bx/weather-app
+  -  git clone https://github.com/Salome-Bx/weather-app
 
   -  cd weather-app
 
