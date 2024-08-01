@@ -1,47 +1,37 @@
+
 # Weather App
 
-Check the current weather on any city on the planet. Switch between metric and imperial units.
+Connexion de l'api Open-Meteo dans le contexte de ma formation Développeur web et web mobile
 
-![Alt img](https://images.ctfassets.net/zlsyc9paq6sa/3uBrJ07WSM40FpolgjInHY/7d886cb4187b52194bf9b63c183a1d3a/1627637330_x.gif)
+Contexte : Affichage de données météos sur des écrans de transports en communs
+![alt text](image.png)
 
-## Features
+Fonctionnalités :
 
-1. User's ability to search cities
+1. Entrer une ville sur un fichier et recevez les données météos de celle-ci
 
-2. Current local time and date
+2. Météo heure par heure
 
-3. Temperatures and humidity
+3. Information de température et humidité
 
-4. Wind speed and direction
+4. Direction et vitesse du vent
 
-5. Sunrise and sunset times
+5. Coucher et lever de soleil
 
-6. Metric vs Imperial system
 
-7. Error handling and loading info
+
+
 
 ## Installation
 
-1. `git clone https://github.com/madzadev/weather-app.git`
 
-2. `cd weather-app`
+  -  git clone https://github.com/Salome-Bx/weather-app
 
-3. `npm install`
+  -  cd weather-app
 
-4. Log-in to [Openweathermap.com](https://openweathermap.org/)
+  -  npm install
 
-5. Create an API key
+  -  Créer le .env.local en suivant les instructions du .env.exemple
 
-6. `cp .env.example .env.local`
+  -  npm run dev
 
-7. Paste API key for `OPENWEATHER_API_KEY`
-
-8. `npm run dev`
-
-## Contributions
-
-Any feature requests and pull requests are welcome!
-
-## License
-
-The project is under [MIT license](https://choosealicense.com/licenses/mit/).

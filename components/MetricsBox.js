@@ -32,9 +32,9 @@ export const MetricsBox = ({ weatherData, unitSystem }) => {
         title={"Direction du vent"}
         iconSrc={"/icons/compass.png"}
         metric={degToCompass(weatherData.current.wind_direction_10m)}
-      /> 
-     
-       <MetricsCard
+      />
+
+      <MetricsCard
         title={"Levé du soleil"}
         iconSrc={"/icons/sunrise.png"}
         metric={getTime(
