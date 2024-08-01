@@ -1,9 +1,11 @@
 
 # Weather App
 
+
 Connexion de l'api Open-Meteo dans le contexte de ma formation Développeur web et web mobile
 
 Contexte : Affichage de données météos sur des écrans de transports en communs
+
 ![alt text](image.png)
 
 Fonctionnalités :
