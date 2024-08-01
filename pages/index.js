@@ -21,7 +21,7 @@ export const App = () => {
   useEffect(() => {
       refreshMeteoData(() => {
       }); 
-  }, []);
+  }, 60 * 60 * 1000);
 
 
   
@@ -83,7 +83,7 @@ export const App = () => {
       <MainCard
         city={cityData.name}
         country={cityData.country_code}
-        iconName={weatherData.current.isDay === 1 ? weatherData.current.weather_code : `${weatherData.current.weather_code}n`}
+        iconName={weatherData.current.weather_code}
         unitSystem={unitSystem}
         weatherData={weatherData}
         />

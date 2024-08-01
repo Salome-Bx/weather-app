@@ -9,7 +9,6 @@ export const UnitSwitch = ({ onClick, unitSystem }) => {
         }`}
         onClick={onClick}
       >
-        Système métrique
       </p>
       <p
         className={`${styles.switch} ${
@@ -17,7 +16,6 @@ export const UnitSwitch = ({ onClick, unitSystem }) => {
         }`}
         onClick={onClick}
       >
-        Système impérial
       </p>
     </div>
   );
